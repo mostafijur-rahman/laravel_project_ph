@@ -1,0 +1,263 @@
+
+    // if($request->input('report_type') == 'challan_due'){
+    //     $query = Trip::query()->with('vehicle','getTripsByGroupId')->whereHas('provider', function($subQuery) {
+    //         $subQuery->where('due_fair','>',0);
+    //     });
+    //     if($request->input('trip_number')){
+
+    //             $query = $query->where('number', $request->input('trip_number'));  
+            
+            
+    //     }
+    //     if($request->input('vehicle_number')){
+
+    //         $query = $query->whereHas('provider', function($subQuery) use($request) {
+    //             $subQuery->where('vehicle_number', $request->input('vehicle_number')); 
+    //         });
+    //     }
+    //     if($date_range_status == 'date_wise' && $daterange){
+        
+    //         $date = explode(' - ', $daterange);
+    //         $start_date = Carbon::parse($date[0])->startOfDay();
+    //         $end_date = Carbon::parse($date[1])->endOfDay();
+    //         $data['title'] .= ' - '  . __('cmn.date') .' - (' . Carbon::parse($date[0])->format('d F, Y') .' ' .__('cmn.from'). ' '. Carbon::parse($date[1])->format('d F, Y') . ')';
+            
+    //         $query = $query->whereBetween('date', [$start_date, $end_date]);
+    //     }
+    //     // mothly report start
+    //     if($date_range_status == 'monthly_report'){
+    //         if(!$month){
+    //             Toastr::error(__('cmn.please_select_month_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+
+    //         $month_name = CommonService::getMonthNameByMonthId($month);
+    //         $data['title'] .= ' - (' . __('cmn.month') .'- ' .$month_name. ', ' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //         $query = $query->whereMonth('date',$month)->whereYear('date',$year); 
+    //     }
+    //     // monthly report end
+    //     // yearly report start
+    //     if($date_range_status == 'yearly_report'){
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         $data['title'] .= ' - (' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //         // expense -----
+    //         $query = $query->whereYear('date',$year);
+    //     }
+    //     // yearly_report_end
+    //     if($request->input('vehicle_id')){
+
+    //         $query = $query->whereHas('provider', function($subQuery) use($request) {
+    //             $subQuery->where('vehicle_id', $request->input('vehicle_id')); 
+    //         });
+    //     }
+    //         $data['trips'] = $query->orderBy('date','desc')->get();
+    //         $pdf = PDF::loadView('provider.report.challan_due_pdf', $data);
+    //         if($request->input('download_pdf') == 'true'){
+    //             return $pdf->download($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         } else {
+    //             return $pdf->stream($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         }
+    //     }
+    // if($request->input('report_type') == 'challan_paid'){
+    //     $query = TripChallan::where('for', 'provider_trip');
+    //     if($request->input('trip_number')){
+
+    //             $query = $query->whereHas('trip', function($subQuery) use($request) {
+    //                 $subQuery->where('number', $request->input('trip_number'));  
+    //         });
+            
+    //         }
+    //         if($request->input('vehicle_number')){
+
+    //             $query = $query->whereHas('trip.provider', function($subQuery) use($request) {
+    //                 $subQuery->where('vehicle_number', $request->input('vehicle_number')); 
+    //         });
+    //         }
+    //         if($date_range_status == 'date_wise' && $daterange){
+        
+    //             $date = explode(' - ', $daterange);
+    //             $start_date = Carbon::parse($date[0])->startOfDay();
+    //             $end_date = Carbon::parse($date[1])->endOfDay();
+    //             $data['title'] .= ' - '  . __('cmn.date') .' - (' . Carbon::parse($date[0])->format('d F, Y') .' ' .__('cmn.from'). ' '. Carbon::parse($date[1])->format('d F, Y') . ')';
+                
+    //             $query = $query->whereBetween('date', [$start_date, $end_date]);
+    //         }
+    //         // mothly report start
+    //         if($date_range_status == 'monthly_report'){
+    //             if(!$month){
+    //                 Toastr::error(__('cmn.please_select_month_first'), __('cmn.warning'));
+    //                 return redirect()->back();
+    //             }
+    //             if(!$year){
+    //                 Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //                 return redirect()->back();
+    //             }
+
+    //             $month_name = CommonService::getMonthNameByMonthId($month);
+    //             $data['title'] .= ' - (' . __('cmn.month') .'- ' .$month_name. ', ' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //             $query = $query->whereMonth('date',$month)->whereYear('date',$year); 
+    //         }
+    //     // monthly report end
+    //     // yearly report start
+    //     if($date_range_status == 'yearly_report'){
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         $data['title'] .= ' - (' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //         // expense -----
+    //         $query = $query->whereYear('date',$year);
+    //     }
+    //     // yearly_report_end
+    //         if($request->input('vehicle_id')){
+
+    //             $query = $query->whereHas('trip.provider', function($subQuery) use($request) {
+    //                 $subQuery->where('vehicle_id', $request->input('vehicle_id')); 
+    //             });
+    //         }
+    //         $data['lists'] = $query->orderBy('date','desc')->get();
+    //         $pdf = PDF::loadView('provider.report.provider_pdf', $data);
+    //         if($request->input('download_pdf') == 'true'){
+    //             return $pdf->download($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //     } 
+    //     else {
+    //             return $pdf->stream($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         }
+    // }
+    // if($request->input('report_type') == 'demarage_due'){
+    //     $query = Trip::query()->with('vehicle','getTripsByGroupId')->whereHas('provider', function($subQuery) {
+    //                 $subQuery->where('demarage_due','>',0);
+    //             });
+    //         if($request->input('trip_number')){
+    
+    //                 $query = $query->where('number', $request->input('trip_number'));  
+                
+    //         }
+    //         if($request->input('vehicle_number')){
+
+    //             $query = $query->whereHas('provider', function($subQuery) use($request) {
+    //                 $subQuery->where('vehicle_number', $request->input('vehicle_number')); 
+    //             });
+    //         }
+    //         if($date_range_status == 'date_wise' && $daterange){
+        
+    //             $date = explode(' - ', $daterange);
+    //             $start_date = Carbon::parse($date[0])->startOfDay();
+    //             $end_date = Carbon::parse($date[1])->endOfDay();
+    //             $data['title'] .= ' - '  . __('cmn.date') .' - (' . Carbon::parse($date[0])->format('d F, Y') .' ' .__('cmn.from'). ' '. Carbon::parse($date[1])->format('d F, Y') . ')';
+                
+    //             $query = $query->whereBetween('date', [$start_date, $end_date]);
+    //         }
+    //         // mothly report start
+    //         if($date_range_status == 'monthly_report'){
+    //             if(!$month){
+    //                 Toastr::error(__('cmn.please_select_month_first'), __('cmn.warning'));
+    //                 return redirect()->back();
+    //             }
+    //             if(!$year){
+    //                 Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //                 return redirect()->back();
+    //             }
+    //             $month_name = CommonService::getMonthNameByMonthId($month);
+    //             $data['title'] .= ' - (' . __('cmn.month') .'- ' .$month_name. ', ' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //             $query = $query->whereMonth('date',$month)->whereYear('date',$year); 
+    //         }
+
+    //     if($date_range_status == 'yearly_report'){
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         $data['title'] .= ' - (' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //         // expense -----
+    //         $query = $query->whereYear('date',$year);
+    //     }
+    //     // yearly_report_end
+    //         if($request->input('vehicle_id')){
+
+    //             $query = $query->whereHas('provider', function($subQuery) use($request) {
+    //                 $subQuery->where('vehicle_id', $request->input('vehicle_id')); 
+    //             });
+    //         }
+    //         $data['trips'] = $query->orderBy('date','desc')->get();
+    //         $pdf = PDF::loadView('provider.report.challan_due_pdf', $data);
+    //         if($request->input('download_pdf') == 'true'){
+    //             return $pdf->download($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         }
+    //         else{
+    //                 return $pdf->stream($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //             }
+    // }
+    // if($request->input('report_type') == 'demarage_paid'){
+    //     $query = TripChallan::where('for', 'provider_demarage');
+    //     if($request->input('trip_number')){
+
+    //             $query = $query->whereHas('trip', function($subQuery) use($request) {
+    //                 $subQuery->where('number', $request->input('trip_number'));  
+    //         });
+            
+    //     }
+    //     if($request->input('vehicle_number')){
+
+    //         $query = $query->whereHas('trip.provider', function($subQuery) use($request) {
+    //             $subQuery->where('vehicle_number', $request->input('vehicle_number')); 
+    //         });
+    //     }
+    //     if($date_range_status == 'date_wise' && $daterange){
+        
+    //         $date = explode(' - ', $daterange);
+    //         $start_date = Carbon::parse($date[0])->startOfDay();
+    //         $end_date = Carbon::parse($date[1])->endOfDay();
+    //         $data['title'] .= ' - '  . __('cmn.date') .' - (' . Carbon::parse($date[0])->format('d F, Y') .' ' .__('cmn.from'). ' '. Carbon::parse($date[1])->format('d F, Y') . ')';
+            
+    //         $query = $query->whereBetween('date', [$start_date, $end_date]);
+    //     }
+    //     // mothly report start
+    //     if($date_range_status == 'monthly_report'){
+    //         if(!$month){
+    //             Toastr::error(__('cmn.please_select_month_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+
+    //             $month_name = CommonService::getMonthNameByMonthId($month);
+    //             $data['title'] .= ' - (' . __('cmn.month') .'- ' .$month_name. ', ' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //             $query = $query->whereMonth('date',$month)->whereYear('date',$year); 
+    //     }
+    //     // monthly report end
+    //     // yearly report start
+    //     if($date_range_status == 'yearly_report'){
+    //         if(!$year){
+    //             Toastr::error(__('cmn.please_select_year_first'), __('cmn.warning'));
+    //             return redirect()->back();
+    //         }
+    //         $data['title'] .= ' - (' . __('cmn.year') .'- ' .__('cmn.'.$year.''). ')';
+    //         // expense -----
+    //         $query = $query->whereYear('date',$year);
+    //     }
+    //     // yearly_report_end
+    //         if($request->input('vehicle_id')){
+
+    //             $query = $query->whereHas('trip.provider', function($subQuery) use($request) {
+    //                 $subQuery->where('vehicle_id', $request->input('vehicle_id')); 
+    //             });
+    //         }
+    //         $data['lists'] = $query->orderBy('date','desc')->get();
+    //         $pdf = PDF::loadView('provider.report.provider_pdf', $data);
+    //         if($request->input('download_pdf') == 'true'){
+    //             return $pdf->download($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         }
+    //         else {
+    //                 return $pdf->stream($data['title'] .' ('. __('cmn.reporting_time'). ' - '. $data['reporting_time'] .')'. '.pdf');
+    //         }
+    // }
